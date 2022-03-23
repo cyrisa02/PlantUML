@@ -1,0 +1,22 @@
+@startuml
+hide circle
+
+class Citoyen {
+    code: integer {unique}
+    nom: varchar
+    taille: decimal
+}
+
+class Bague {
+    num_serie: varchar {unique}
+    modele: varchar
+    version: integer
+    version: integer
+}
+
+Citoyen "0..1" -- "1..1" Bague : posséder
+
+@enduml
+
+Citoyen(#code: integer, nom: varchar, taille: decimal, bague: varchar => Bague) avec bague UNIQUE et NOT NULL
+Bague(#num_serie: varchar, model: varchar, version: integer)

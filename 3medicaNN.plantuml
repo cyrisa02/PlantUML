@@ -1,0 +1,47 @@
+@startuml 
+hide circle
+
+class Medicament {     
+    nom: varchar {unique}
+    description: varchar    
+    conditionnement: integer
+}
+
+class Contre_Indication {
+    code: integer {unique}
+    description: varchar
+}
+
+class Composant {
+    code: varchar {unique}
+    intitule: varchar
+}
+
+Medicament "0..n" -- "0..n" Contre_Indication : comporter
+
+Medicament "*" -- "1..*" Composant : utiliser
+(Medicament, Composant) .. Utilise 
+
+class Utilise {
+    dosage: real
+}
+
+@enduml
+
+Medicament (#nom :varchar, description: varchar, conditionnement: integer)
+
+Contre_Indication (#code: integer, description: varchar)
+
+Composant (#code:varchar, intitule:varchar)
+
+Utilise(#medicament=>Medicament, #composant=>Composant, dosage: real)
+
+Medicament_ContreIndication (#med: varchar => Medicament, #indic: integer => Contre_Indication)
+
+Composition (#medicament=>Medicament, #composant=>Composant)
+
+Contre_indication.medicament non null
+
+Déclaration de la table clé étrangère, on a besoin ds cette table d'une clé primaire: c'est le couple #med et #indic
+
+

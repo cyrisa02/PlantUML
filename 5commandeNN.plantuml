@@ -1,0 +1,25 @@
+@startuml
+hide circle
+
+class Commande {
+    reference: integer {unique}
+    total(): decimal
+}
+
+class Article {
+    reference: integer {unique}
+    prix: decimal
+}
+
+Commande "0..n" -- "1..n" Article
+(Commande, Article) .. Quantité
+
+class Quantité {
+    quantité: integer
+}
+@enduml
+
+Commande(#reference: integer)
+Article(#reference: integer, prix: decimal)
+Commande_Article(commande: integer => Commande, article: integer => Article, quantité: integer)
+

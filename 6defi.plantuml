@@ -1,0 +1,39 @@
+@startuml
+hide circle
+
+class Vehicule {
+    num_immat: varchar {unique}
+    color: varchar
+    motor: varchar {unique}
+    nbr_tire: integer
+}
+
+class Motor {
+    Serie_Nr: integer {unique}
+    power: integer
+
+}
+
+class Tire {
+    Serie_Nr: interger {unique}
+    diameter: interger
+    width: integer
+}
+
+class Brand {
+    name: varchar
+}
+
+Vehicule "0..*" -- "0..1" Brand : fabrique
+Vehicule "0..1" -- "0..*" Tire : équipe
+Vehicule "0..1" -- "0..1" Motor : possède
+Brand "0..1" -- "0..*" Motor : fabrique
+Brand "0..1" -- "0..*" Tire : fabrique
+
+
+@enduml
+
+Brand(#name:string)
+Vehicule(#num_immat:string, color:string, brand=>Brand) avec Marque NOT NULL
+Motor(#num_serie:string, power:integer, num_immat=>Vehicule, brand=>Brand) avec num_immat KEY et brand NOT NULL
+Tire(#num_serie:string, diameter:integer, width:integer, brand=>Brand, num_immat=>Vehicule) avec brand NOT NULL et num_immat NOT NULL

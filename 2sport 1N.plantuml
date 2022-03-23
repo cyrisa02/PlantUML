@@ -1,0 +1,19 @@
+@startuml 
+hide circle
+
+class Adherent {
+    numero: integer {unique}
+    nom: varchar
+}
+
+class Sport {
+    nom: varchar {unique}
+}
+
+Adherent "0..n" -- "1..1" Sport : pratiquer
+@enduml
+
+
+Adherent (#numero: varchar, nom:varchar, sport: varchar => Sport) avec sport NOT NULL
+
+Sport (#nom: varchar)

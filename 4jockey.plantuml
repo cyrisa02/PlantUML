@@ -1,0 +1,23 @@
+@startuml
+hide circle
+
+class Jockey {
+    numero: integer {unique}
+    nom: varchar
+    prenom: varchar 
+    sponsor: varchar
+    }
+
+class Cheval {
+    num_ident: integer {unique}
+    poids: decimal
+    taille: decimal
+    race: varchar
+}
+
+Jockey "0..1" -- "1..1" Cheval : > posséder
+
+@enduml
+
+Jockey(#numero: integer, nom: varchar, prenom: varchar, sponsor: varchar, cheval: varchar => Cheval) avec cheval UNIQUE et NOT NULL
+Cheval(#num_dent: integer, poids: decimal, taille: decimal, race: varchar)

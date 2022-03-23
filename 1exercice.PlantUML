@@ -1,0 +1,14 @@
+@startuml
+hide circle
+class Personnel {
+identifiant: integer {unique}
+nom: varchar
+prenom: varchar
+date_naissance: date
+planete: varchar
+}
+class Croiseur {
+bouclier: integer
+}
+Personnel "*"--"0..1" Croiseur : membre de >
+@enduml
